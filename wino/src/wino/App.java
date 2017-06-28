@@ -2,6 +2,7 @@ package wino;
 
 import java.util.ArrayList;
 
+import controlP5.Button;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.DropdownList;
@@ -35,6 +36,7 @@ public class App extends PApplet{
 		
 		addTextfield();
 		addDropdownList();
+		addButton();
 	}
 	
 	public void draw(){
@@ -46,6 +48,9 @@ public class App extends PApplet{
 		//  System.out.println(cp5.get(Textfield.class, "textInput_1").getText());
 	}
 	
+	
+	
+	
 	private void addTextfield(){
 		Textfield tf_carboyVolume = cp5.addTextfield("objetosc balonu")
 				.setPosition(20, 100);
@@ -53,6 +58,17 @@ public class App extends PApplet{
 		Textfield tf_alcoholContent = cp5.addTextfield("moc wina")
 				.setPosition(20, 170);
 		customizeTextfield(tf_alcoholContent);
+	}
+	
+	private void addDropdownList(){
+		DropdownList ddl_fruitType = cp5.addDropdownList("fruits")
+				.setPosition(20, 240);
+		customizeDropdownList(ddl_fruitType);
+	}
+	
+	private void addButton(){
+		Button b_calculate = cp5.addButton("licz")
+				.setPosition(300, 300);
 	}
 	
 	private void customizeTextfield(Textfield tf){
@@ -64,13 +80,6 @@ public class App extends PApplet{
 		.getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE)
 		;
 	}
-	
-	private void addDropdownList(){
-		DropdownList ddl_fruitType = cp5.addDropdownList("rodzaj owocow")
-				.setPosition(20, 240);
-		customizeDropdownList(ddl_fruitType);
-	}
-	
 	private void customizeDropdownList(DropdownList ddl){
 		//ddl.setBackgroundColor(color(190));
 		ddl.setItemHeight(30);
@@ -87,6 +96,28 @@ public class App extends PApplet{
 		//ddl.setColorActive(color(255,128));
 	}
 	
+	public void licz(){
+		
+		String carboyVolume_str = cp5.get(Textfield.class, "objetosc balonu").getText();
+		double carboyVolume = Double.parseDouble(carboyVolume_str.replaceAll(",", "."));
+		String alcoholContent_str = cp5.get(Textfield.class, "moc wina").getText();
+		double alcoholContent = Double.parseDouble(alcoholContent_str.replaceAll(",", "."));
+		System.out.println(carboyVolume);
+	}
+	
+	public void controlEvent(ControlEvent theEvent) {
+		if (theEvent.isGroup()) {
+			// not used in this sketch but has to be included
+		} 
+		else if(theEvent.isController()) {
+			if (theEvent.getController().getName().equals("fruits")){
+					int index = (int) theEvent.getController().getValue();
+					String fruitType = fruitsTypes[index];
+					System.out.println(fruitType);
+				}
+			
+		}
+	}
 	
 	private void parseFruit(){
 		String fileName = "fruits.json";
