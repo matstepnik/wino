@@ -15,6 +15,9 @@ public class App extends PApplet{
 	ControlP5 cp5;
 	JSONArray fruits;
 	String[] fruitsTypes;
+	Input input;
+	Wine wine;
+	boolean isCalculated;
 	/*
 	Textfield tf_carboyVolume;
 	Textfield tf_alcoholContent;
@@ -30,6 +33,7 @@ public class App extends PApplet{
 	
 	public void setup(){
 		cp5 = new ControlP5(this);
+		input = new Input();
 		parseFruit();
 		getFruitsItems();
 		
@@ -42,10 +46,13 @@ public class App extends PApplet{
 	public void draw(){
 		surface.setTitle(mouseX + ", " + mouseY);
 		background(100);
-		//fill(255);
-		 // text(cp5.get(Textfield.class, "textInput_1").getText(), 360, 130);
-		//  text(textValue, 360, 180);
-		//  System.out.println(cp5.get(Textfield.class, "textInput_1").getText());
+		
+		if (isCalculated){
+			fill(0);
+			ellipse(100,100,100,100);
+			stroke(0);
+			text(String.valueOf(wine.getSugarMass()), 20, 400);
+		}
 	}
 	
 	
@@ -80,6 +87,7 @@ public class App extends PApplet{
 		.getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE)
 		;
 	}
+	
 	private void customizeDropdownList(DropdownList ddl){
 		//ddl.setBackgroundColor(color(190));
 		ddl.setItemHeight(30);
@@ -96,14 +104,33 @@ public class App extends PApplet{
 		//ddl.setColorActive(color(255,128));
 	}
 	
+	
 	public void licz(){
-		
+		addInput();
+		calcWine();
+		System.out.println(input.getFruit().getType()+" "
+				+input.getAlcoholContent()+"% "
+				+input.getCarboyVolume()+"l baniak");
+		isCalculated = true;
+	}
+	
+	private void addInput(){
 		String carboyVolume_str = cp5.get(Textfield.class, "objetosc balonu").getText();
 		double carboyVolume = Double.parseDouble(carboyVolume_str.replaceAll(",", "."));
+		input.setCarboyVolume(carboyVolume);
 		String alcoholContent_str = cp5.get(Textfield.class, "moc wina").getText();
 		double alcoholContent = Double.parseDouble(alcoholContent_str.replaceAll(",", "."));
-		System.out.println(carboyVolume);
+		input.setAlcoholContent(alcoholContent);
 	}
+	
+	private void calcWine(){
+		wine = new FruitWine(input.getCarboyVolume(), 
+				input.getAlcoholContent(), 
+				input.getFruit());
+	}
+	
+	
+	
 	
 	public void controlEvent(ControlEvent theEvent) {
 		if (theEvent.isGroup()) {
@@ -112,8 +139,8 @@ public class App extends PApplet{
 		else if(theEvent.isController()) {
 			if (theEvent.getController().getName().equals("fruits")){
 					int index = (int) theEvent.getController().getValue();
-					String fruitType = fruitsTypes[index];
-					System.out.println(fruitType);
+					Fruit fruit = new Fruit(fruits, fruitsTypes[index]);
+					input.setFruit(fruit);
 				}
 			
 		}

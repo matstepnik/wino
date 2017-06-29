@@ -32,19 +32,19 @@ public class FruitWine extends Wine {
 		return wineVolume / 2 - sugarMass * Wine.SUGAR_DENSITY;
 	}
 	
-	private double getFruitMass() {
+	public double getFruitMass() {
 		return fruitMass;
 	}
 
-	private Fruit getFruit() {
+	public Fruit getFruit() {
 		return fruit;
 	}
 
-	private double getWaterVolume() {
+	public double getWaterVolume() {
 		return waterVolume;
 	}
 
-	private double getCitricAcidMass() {
+	public double getCitricAcidMass() {
 		return citricAcidMass;
 	}
 
