@@ -1,7 +1,5 @@
 package wino;
 
-import java.util.ArrayList;
-
 import controlP5.Button;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
@@ -108,10 +106,8 @@ public class App extends PApplet{
 	public void licz(){
 		addInput();
 		calcWine();
-		System.out.println(input.getFruit().getType()+" "
-				+input.getAlcoholContent()+"% "
-				+input.getCarboyVolume()+"l baniak");
 		isCalculated = true;
+		System.out.println(wine.toString());
 	}
 	
 	private void addInput(){

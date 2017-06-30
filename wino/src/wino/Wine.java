@@ -21,27 +21,27 @@ public class Wine {
 		return 4 / 5 * carboyVolume;
 	}
 	
-	protected double getWineVolume(){
+	public double getWineVolume(){
 		return wineVolume;
 	}
 	
-	protected double getCarboyVolume(){
+	public double getCarboyVolume(){
 		return carboyVolume;
 	}
 
-	protected double getSugarMass() {
+	public double getSugarMass() {
 		return sugarMass;
 	}
 
-	protected double getAlcoholContent() {
+	public double getAlcoholContent() {
 		return alcoholContent;
 	}
 
-	protected double getYeastMass() {
+	public double getYeastMass() {
 		return yeastMass;
 	}
 
-	protected double getE224Mass() {
+	public double getE224Mass() {
 		return e224Mass;
 	}
 }

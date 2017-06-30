@@ -1,6 +1,5 @@
 package wino;
 
-import processing.core.PApplet;
 import processing.data.*;
 
 public class Fruit {
