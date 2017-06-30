@@ -11,25 +11,25 @@ public class FruitWine extends Wine {
 		super(carboyVolume, alcoholContent);
 		this.fruit = fruit;
 		fruitMass = calcFruitMass();
-		waterVolume = 30; //calcWaterVolume();
-		citricAcidMass = 4; //calcCitricAcidMass();
+		waterVolume = calcWaterVolume();
+		citricAcidMass = calcCitricAcidMass();
 		sugarMass = calcSugarMass();
 	}
 	
 	private double calcFruitMass(){
-		return wineVolume / (1 - fruit.getLoss()/100);
+		return wineVolume / (1.0 - fruit.getLoss()/100.0);
 	}
 	
 	private double calcSugarMass(){
-		return wineVolume*(alcoholContent*0.016 - fruit.getSugarContent());
+		return wineVolume*(alcoholContent*16.0 - fruit.getSugarContent());
 	}
 	
 	private double calcCitricAcidMass(){
-		return (8 - fruit.getAcidContent() / 2) * wineVolume;
+		return (8.0 - fruit.getAcidContent() / 2.0) * wineVolume;
 	}
 	
 	private double calcWaterVolume(){
-		return wineVolume / 2 - sugarMass * Wine.SUGAR_DENSITY;
+		return wineVolume / 2.0 - sugarMass * Wine.SUGAR_DENSITY;
 	}
 	
 	public double getFruitMass() {
@@ -56,8 +56,7 @@ public class FruitWine extends Wine {
 				+"masa owoców: "+fruitMass+" kg, "
 				+"masa cukru: "+sugarMass+" kg, "
 				+"objêtoœæ wody: "+waterVolume+" l, "
-				+"masa kwasku cytrynowego: "+citricAcidMass+" g";
-				
+				+"masa kwasku cytrynowego: "+citricAcidMass+" g";	
 	}
 
 

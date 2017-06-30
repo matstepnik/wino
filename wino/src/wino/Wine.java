@@ -14,11 +14,11 @@ public class Wine {
 	Wine(double carboyVolume, double alcoholContent){
 		this.carboyVolume = carboyVolume;
 		this.alcoholContent = alcoholContent;
-		wineVolume = calcWineVolume(carboyVolume);
+		wineVolume = calcWineVolume();
 	}
 	
-	private double calcWineVolume(double carboyVolume){
-		return 4 / 5 * carboyVolume;
+	private double calcWineVolume(){
+		return 4.0 / 5.0 * carboyVolume;
 	}
 	
 	public double getWineVolume(){
@@ -43,5 +43,11 @@ public class Wine {
 
 	public double getE224Mass() {
 		return e224Mass;
+	}
+	
+	public String toString(){
+		return "balon: "+carboyVolume+" l, "
+				+"moc wina: "+alcoholContent+" %, "
+				+"objêtoœæ wina: "+wineVolume+" l";	
 	}
 }
