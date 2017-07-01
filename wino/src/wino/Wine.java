@@ -4,7 +4,7 @@ public class Wine {
 
 	protected double wineVolume; //[l]
 	protected double carboyVolume; //[l]
-	protected double sugarMass; //[kg]
+	protected double sugarMass; //[g]
 	protected double alcoholContent; //[%]
 	protected double yeastMass; //[g]
 	protected double e224Mass; //[g]

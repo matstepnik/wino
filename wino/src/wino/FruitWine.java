@@ -21,7 +21,12 @@ public class FruitWine extends Wine {
 	}
 	
 	private double calcSugarMass(){
-		return wineVolume*(alcoholContent*16.0 - fruit.getSugarContent());
+		double sugarMass = 0.0;
+		double sugarMassPerLitre = alcoholContent*16.0 - fruit.getSugarContent();
+		if (sugarMassPerLitre > 0.0){
+			sugarMass = wineVolume*sugarMassPerLitre;
+		}
+		return sugarMass;
 	}
 	
 	private double calcCitricAcidMass(){
@@ -45,7 +50,7 @@ public class FruitWine extends Wine {
 	}
 
 	public double getCitricAcidMass() {
-		return citricAcidMass;
+		return citricAcidMass; 
 	}
 	
 	public String toString(){
@@ -54,7 +59,7 @@ public class FruitWine extends Wine {
 				+"moc wina: "+alcoholContent+" %, "
 				+"objêtoœæ wina: "+wineVolume+" l, "
 				+"masa owoców: "+fruitMass+" kg, "
-				+"masa cukru: "+sugarMass+" kg, "
+				+"masa cukru: "+sugarMass+" g, "
 				+"objêtoœæ wody: "+waterVolume+" l, "
 				+"masa kwasku cytrynowego: "+citricAcidMass+" g";	
 	}

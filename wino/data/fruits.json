@@ -1,4 +1,9 @@
 ﻿[
+{"type":"aronia", "loss":1, "sugar":75, "acid":10},
+{"type":"gruszka", "loss":24, "sugar":95, "acid":3},
 {"type":"jablko", "loss":27, "sugar":100, "acid":7},
+{"type":"malina", "loss":0, "sugar":50, "acid":13},
+{"type":"porzeczka czarna", "loss":3, "sugar":80, "acid":26},
+{"type":"truskawka", "loss":4, "sugar":65, "acid":7},
 {"type":"wisnia", "loss":15, "sugar":97, "acid":9}
 ]
