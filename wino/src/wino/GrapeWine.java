@@ -6,6 +6,7 @@ public class GrapeWine extends Wine{
 		super(carboyVolume, alcoholContent);
 	}
 
+	//TODO napisaæ klasê
 	
 	
 }
