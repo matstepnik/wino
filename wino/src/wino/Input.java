@@ -15,7 +15,7 @@ public class Input {
 	JSONArray fruits;
 	String[] fruitsTypes;
 	
-	private Textfield tf_carboyVolume, tf_alcoholContent;
+	private Textfield tf_carboyVolume;
 	private Slider s_alcoholContent;
 	private DropdownList ddl_fruitType;
 	private App p;

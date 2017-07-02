@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import controlP5.Button;
-import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Label;
 
@@ -124,21 +123,6 @@ public class App extends PApplet{
 				input.getAlcoholContent(), 
 				input.getFruit());
 	}
-
-	/*
-	public void controlEvent(ControlEvent theEvent) {
-		if (theEvent.isGroup()) {
-			// not used in this sketch but has to be included
-		} 
-		else if(theEvent.isController()) {
-			if (theEvent.getController().getName().equals("fruits")){
-				int index = (int) theEvent.getController().getValue();
-				Fruit fruit = new Fruit(input.fruits, input.fruitsTypes[index]);
-				input.setFruit(fruit);
-			}
-		}
-	}
-	*/
 
 	private boolean overRect(int x, int y, int width, int height)  {
 		if (mouseX >= x && mouseX <= x+width && 
