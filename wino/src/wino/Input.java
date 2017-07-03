@@ -117,8 +117,12 @@ public class Input {
 	
 	public void addInput(){
 		//TODO handle exceptions
+		try{
 		String carboyVolume_str = p.cp5.get(Textfield.class, "carboyVolume").getText();
 		carboyVolume = Double.parseDouble(carboyVolume_str.replaceAll(",", "."));
+		} catch (NumberFormatException e){
+			System.out.println("b³êdne dane");
+		}
 		
 		alcoholContent = p.cp5.get(Slider.class, "alcoholContent").getValue();
 		
