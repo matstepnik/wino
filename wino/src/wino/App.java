@@ -6,9 +6,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import controlP5.Button;
+import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Label;
-
+import controlP5.RadioButton;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -19,16 +20,16 @@ public class App extends PApplet{
 	private Options options;
 	private Input input;
 	private Output output;
-	
+
 	private PFont vesper;
 	private PImage logo;
 	private PImage info;
 	private boolean overInfo;
 	ControlP5 cp5;
-	
+
 	Wine wine;
 	private boolean isCalculated;
-	
+
 	public static void main(String[] args) {
 		PApplet.main("wino.App");
 	}
@@ -38,22 +39,22 @@ public class App extends PApplet{
 	}
 
 	public void setup(){
-		
+
 		vesper = createFont("font/VesperLibre-Regular.ttf", 32);
 		Label.setUpperCaseDefault(false);
 		cp5 = new ControlP5(this);
 		cp5.setFont(vesper, 20);
 		logo = loadImage("logo_lemag.png");
 		info = loadImage("info.png");
-		
+
 		options = new Options(this);
 		input = new Input(this);
 		output = new Output(this);
-		
+
 		options.setup();
 		input.setup();
 		output.setup();
-		
+
 		addButton();
 	}
 
@@ -63,14 +64,14 @@ public class App extends PApplet{
 		addTitle();
 		image(logo, Settings.MARGIN, 0);
 		image(info, width-30-info.width, 30);
-		
+
 		options.draw();
 		input.draw();
-		
+
 		if (isCalculated){
 			output.draw();
 		}
-		
+
 		if (overInfo){
 			addInfo();
 		}
@@ -83,7 +84,7 @@ public class App extends PApplet{
 		text("Kalkulator winiarski dla ka¿dego", logo.width+2*Settings.MARGIN, 50);
 		popStyle();
 	}
-	
+
 	private void addInfo(){
 		pushStyle();
 		fill(255);
@@ -104,7 +105,7 @@ public class App extends PApplet{
 				.setPosition(360, 360);
 		customizeButton(b_calculate);
 	}
-	
+
 	private void customizeButton(Button b){
 		b.setSize(100, Settings.SIZE_CONTROLER)
 		.setLabel("Oblicz")
@@ -118,10 +119,28 @@ public class App extends PApplet{
 		isCalculated = true;
 	}
 
+	public void controlEvent(ControlEvent theEvent) {
+		if (theEvent.isGroup()) {
+			// not used in this sketch but has to be included
+			if (theEvent.getGroup().getName().equals("radio")){
+				float value = theEvent.getGroup().getValue();
+				if (value == 0){
+					options.isCarboyChecked = true;
+					options.isFruitsChecked = false;
+				}
+				if (value == 1){
+					options.isCarboyChecked = false;
+					options.isFruitsChecked = true;
+				}
+			}
+		} 
+		else if(theEvent.isController()) {
+			
+		}
+	}
+
 	private void calcWine(){
-		wine = new FruitWine(input.getCarboyVolume(), 
-				input.getAlcoholContent(), 
-				input.getFruit());
+		wine = new FruitWine(input, options);
 	}
 
 	private boolean overRect(int x, int y, int width, int height)  {
@@ -138,7 +157,7 @@ public class App extends PApplet{
 			openBrowser("http://www.centrumfermentacji.pl");
 		}
 	}
-	
+
 	public void mouseMoved(){
 		if (overRect(width-30-info.width, 30, info.width, info.height)){
 			overInfo = true;
@@ -146,7 +165,7 @@ public class App extends PApplet{
 			overInfo = false;
 		}
 	}
-	
+
 	private void openBrowser(String url){
 		if(Desktop.isDesktopSupported()){
 			Desktop desktop = Desktop.getDesktop();
@@ -158,7 +177,7 @@ public class App extends PApplet{
 			}
 		}
 	}
-	
+
 	public Options getOptions() {
 		return options;
 	}

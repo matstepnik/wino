@@ -1,5 +1,6 @@
 package wino;
 
+import controlP5.DropdownList;
 import controlP5.RadioButton;
 
 public class Options {
@@ -8,6 +9,7 @@ public class Options {
 	private RadioButton rb_carboyOrFruits;
 	private int x, y;
 	private int width, height;
+	boolean isCarboyChecked, isFruitsChecked;
 	
 	Options(App p){
 		this.p = p;
@@ -40,10 +42,13 @@ public class Options {
 			.setSize(Settings.SIZE_CONTROLER, Settings.SIZE_CONTROLER)
 			.setItemsPerRow(2)
 			.setSpacingColumn(width/2)
-			.addItem("Mam balon", 1)
-			.addItem("Mam owoce/sok", 2);
+			.addItem("Mam balon", 0)
+			.addItem("Mam owoce/sok", 1)
+			.setNoneSelectedAllowed(false)
+			.activate(0)
+			;
 	}
-
+	
 	public int getX() {
 		return x;
 	}

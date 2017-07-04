@@ -4,22 +4,33 @@ public class Wine {
 
 	protected double wineVolume; //[l]
 	protected double carboyVolume; //[l]
-	protected double sugarMass; //[g]
+	protected double sugarMass; //[kg]
 	protected double alcoholContent; //[%]
 	protected double yeastMass; //[g]
 	protected double e224Mass; //[g]
 	
 	public static final double SUGAR_DENSITY = 0.625; //[kg/l]
 	
-	Wine(double carboyVolume, double alcoholContent){
-		this.carboyVolume = carboyVolume;
-		this.alcoholContent = alcoholContent;
-		wineVolume = calcWineVolume();
+	Wine(Input input, Options options){
+		alcoholContent = input.getAlcoholContent();
+		if (options.isCarboyChecked == true){
+			carboyVolume = input.getCarboyVolume();
+			wineVolume = 4.0 / 5.0 * carboyVolume;
+		}
+		if (options.isFruitsChecked == true){
+						
+		}
 	}
 	
-	private double calcWineVolume(){
+	protected double calcCarboyVolume(){
+		return 5.0 / 4.0 * wineVolume;
+	}
+	
+	/*
+	protected double calcWineVolume(){
 		return 4.0 / 5.0 * carboyVolume;
 	}
+	*/
 	
 	public double getWineVolume(){
 		return wineVolume;

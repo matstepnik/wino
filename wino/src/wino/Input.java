@@ -10,70 +10,73 @@ public class Input {
 
 	private double carboyVolume;
 	private double alcoholContent;
+	private double fruitMass;
 	private Fruit fruit;
-	
+
 	JSONArray fruits;
 	String[] fruitsTypes;
-	
-	private Textfield tf_carboyVolume;
+
+	private Textfield tf_carboyVolume, tf_fruitMass;
 	private Slider s_alcoholContent;
 	private DropdownList ddl_fruitType;
 	private App p;
 	private int x, y;
 	private int width, height;
-	
+
 	Input(App p){
 		this.p = p;
 		parseFruit();
 		getFruitsItems();
 	}
-	
+
 	public void setup(){
 		x = Settings.MARGIN;
 		y = 250;
 		width = p.width-2*Settings.MARGIN;
 		height = 100;
-		
+
 		addTextfield();
 		addDropdownList();
 		addSlider();
 	}
-	
+
 	public void draw(){
 		p.pushStyle();
 		p.stroke(0);
 		p.fill(Settings.FILL_BOX);
 		p.rect(x, y, width, height);
-		
+
 		p.textSize(20);
 		p.fill(Settings.FILL_TEXT);
 		p.text("Jakie wino planujesz?", x, y-10);
 		p.popStyle();
 	}
-	
+
 	private void addTextfield(){
 		tf_carboyVolume = p.cp5.addTextfield("carboyVolume")
-				.setPosition(p.getOptions().getX()+80, p.getOptions().getY()+45); //TODO uzale¿niæ od wspó³rzêdnych Options
+				.setPosition(p.getOptions().getX()+80, p.getOptions().getY()+45)
+				.setLabel("litrów");
 		customizeTextfield(tf_carboyVolume);
-		/*
-		tf_alcoholContent = p.cp5.addTextfield("alcoholContent")
-				.setPosition(x+width/3, y+20);
-		customizeTextfield(tf_alcoholContent);
-		*/
+
+		tf_fruitMass = p.cp5.addTextfield("fruitMass")
+				.setPosition(p.getOptions().getX()+480, p.getOptions().getY()+45)
+				.setLabel("kilogramów");
+		customizeTextfield(tf_fruitMass);
+
 	}
-	
+
 	private void addSlider(){
 		s_alcoholContent = p.cp5.addSlider("alcoholContent")
 				.setPosition(x+width/3, y+20);
 		customizeSlider(s_alcoholContent);
 	}
-	
-		private void customizeSlider(Slider s){
+
+	private void customizeSlider(Slider s){
 		s.setSize(150, Settings.SIZE_CONTROLER)
 		.setRange(8, 18)
 		.setNumberOfTickMarks(21)
 		.setDecimalPrecision(1)
-	    .setSliderMode(Slider.FLEXIBLE) 
+		.setSliderMode(Slider.FLEXIBLE) 
 		.shuffle()
 		.setLabel("%")
 		;
@@ -84,13 +87,13 @@ public class Input {
 				.setPosition(x, y+20);
 		customizeDropdownList(ddl_fruitType);
 	}
-	
+
 	private void customizeTextfield(Textfield tf){
 		tf.setSize(60, Settings.SIZE_CONTROLER)
 		//.setFocus(true)
 		.setColor(p.color(255, 0, 0))
 		.setAutoClear(false)
-		.setLabel("litrów")
+
 		//.setLabelVisible(false)
 		.getCaptionLabel().align(ControlP5.RIGHT_OUTSIDE, ControlP5.CENTER)
 		;
@@ -114,23 +117,28 @@ public class Input {
 		//.setBackgroundColor(color(190))
 		;
 	}
-	
+
 	public void addInput(){
-		//TODO handle exceptions
 		try{
-		String carboyVolume_str = p.cp5.get(Textfield.class, "carboyVolume").getText();
-		carboyVolume = Double.parseDouble(carboyVolume_str.replaceAll(",", "."));
+			if (p.getOptions().isCarboyChecked){
+				String carboyVolume_str = p.cp5.get(Textfield.class, "carboyVolume").getText();
+				carboyVolume = Double.parseDouble(carboyVolume_str.replaceAll(",", "."));
+			}
+			if (p.getOptions().isFruitsChecked){
+				String fruitMass_str = p.cp5.get(Textfield.class, "fruitMass").getText();
+				fruitMass = Double.parseDouble(fruitMass_str.replaceAll(",", "."));
+			}
 		} catch (NumberFormatException e){
 			System.out.println("b³êdne dane");
 		}
-		
+
 		alcoholContent = p.cp5.get(Slider.class, "alcoholContent").getValue();
-		
+
 		int fruitTypeIndex = (int) p.cp5.get(DropdownList.class, "fruits").getValue();
 		fruit = new Fruit(fruits, fruitsTypes[fruitTypeIndex]);
-		
+
 	}
-	
+
 	private void parseFruit(){
 		String fileName = "fruits.json";
 		fruits = p.loadJSONArray(fileName);
@@ -143,7 +151,7 @@ public class Input {
 			fruitsTypes[i] = fruitType;
 		}
 	}
-	
+
 	public double getCarboyVolume() {
 		return carboyVolume;
 	}
@@ -156,11 +164,19 @@ public class Input {
 	public void setAlcoholContent(double alcoholContent) {
 		this.alcoholContent = alcoholContent;
 	}
-	
+
 	public Fruit getFruit() {
 		return fruit;
 	}
 	public void setFruit(Fruit fruit) {
 		this.fruit = fruit;
+	}
+
+	public double getFruitMass() {
+		return fruitMass;
+	}
+
+	public void setFruitMass(double fruitMass) {
+		this.fruitMass = fruitMass;
 	}
 }
