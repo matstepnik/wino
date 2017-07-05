@@ -1,6 +1,5 @@
 package wino;
 
-import controlP5.DropdownList;
 import controlP5.RadioButton;
 
 public class Options {
@@ -39,14 +38,19 @@ public class Options {
 	private void addRadioButton(){
 		rb_carboyOrFruits = p.cp5.addRadioButton("radio")
 			.setPosition(x, y)
-			.setSize(Settings.SIZE_CONTROLER, Settings.SIZE_CONTROLER)
-			.setItemsPerRow(2)
-			.setSpacingColumn(width/2)
 			.addItem("Mam balon", 0)
 			.addItem("Mam owoce/sok", 1)
-			.setNoneSelectedAllowed(false)
-			.activate(0)
 			;
+		customizeRadioButton(rb_carboyOrFruits);
+	}
+	
+	private void customizeRadioButton(RadioButton rb){
+		rb.setSize(Settings.SIZE_CONTROLER, Settings.SIZE_CONTROLER)
+		.setItemsPerRow(2)
+		.setSpacingColumn(width/2)
+		.setNoneSelectedAllowed(false)
+		.activate(0)
+		;
 	}
 	
 	public int getX() {

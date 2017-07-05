@@ -1,7 +1,5 @@
 package wino;
 
-import controlP5.DropdownList;
-
 public class Output {
 
 	private App p;

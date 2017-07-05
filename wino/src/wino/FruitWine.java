@@ -47,7 +47,12 @@ public class FruitWine extends Wine {
 	}
 
 	private double calcCitricAcidMass(){
-		return (8.0 - fruit.getAcidContent() / 2.0) * wineVolume;
+		double citricAcidMass = 0.0;
+		double citricAcidMassPerLitre = 8.0 - fruit.getAcidContent() / 2.0;
+		if (citricAcidMassPerLitre > 0.0){
+			citricAcidMass = citricAcidMassPerLitre * wineVolume;
+		}
+		return citricAcidMass;
 	}
 
 	private double calcWaterVolume(){

@@ -93,7 +93,7 @@ public class Input {
 		//.setFocus(true)
 		.setColor(p.color(255, 0, 0))
 		.setAutoClear(false)
-
+		.setText("0,0")
 		//.setLabelVisible(false)
 		.getCaptionLabel().align(ControlP5.RIGHT_OUTSIDE, ControlP5.CENTER)
 		;
@@ -129,7 +129,8 @@ public class Input {
 				fruitMass = Double.parseDouble(fruitMass_str.replaceAll(",", "."));
 			}
 		} catch (NumberFormatException e){
-			System.out.println("b³êdne dane");
+			tf_carboyVolume.setText("0,0");
+			tf_fruitMass.setText("0,0");
 		}
 
 		alcoholContent = p.cp5.get(Slider.class, "alcoholContent").getValue();
